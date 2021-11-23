@@ -7,8 +7,8 @@
 <body>
     <script>
         
-        function game(){
-            //Initiates a game of rock paper scissors
+        function game(numberRounds=5){
+            //Initiates a game of rock paper scissors with by default numbers of round=5
             //starts by zeroing scores and intialising players moves at each new round
             //determines outcome at each round with roundResult
             //displays in console result using roundOutcomme
@@ -16,7 +16,7 @@
             //on the last round displays final results using gameOutcome
             let playerScore =0;
             let computerScore =0;
-            for (i=1;i<=5;i++){
+            for (round=1;round<=numberRounds;round++){
                 let playerSelection=prompt("Time to play, please choose between: rock, paper, scissors");
                 let computerSelection=computerPlay();
                 let roundResult=gameRound(playerSelection,computerSelection)
@@ -26,20 +26,18 @@
                     case -1:computerScore+=1
                             break;
                 }
-                console.log(`****** Welcome to round ${i} ******`);
+                console.log(`****** Welcome to round ${round} ******`);
                 console.log(roundOutcome(roundResult,playerSelection,computerSelection));
                 console.log(`Current score: Player @ ${playerScore} VS Computer @ ${computerScore}`)
-                console.log(` ****** End of round ******`)
+                console.log(` ****** End of round ${round} out of ${numberRounds} ******`)
             }
-
             return gameOutcome(playerScore,computerScore);
         }
 
         function computerPlay(){ 
             //Create a random integer between 0 and 2 included. 
             //If 0 return rock, if 1 return paper if 2 return scissors
-            let randomOutcome=Math.floor(Math.random()*3)
-            
+            let randomOutcome=Math.floor(Math.random()*3)            
             if (randomOutcome===0) {
                 return "rock";
             }
@@ -66,7 +64,6 @@
             } 
         }
 
-
         function roundOutcome(gameRound,playerSelection,computerSelection){
             //Phrases the round outcome based on:
             //gameRound result and players input
@@ -80,6 +77,7 @@
                 return `It's a draw, both of you played ${playerSelection}`;
             }
         }
+
         function gameOutcome(playerScore,computerScore){
             //Phrases game outcome after last based on players' scores
             if (playerScore===computerScore){
