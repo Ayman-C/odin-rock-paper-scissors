@@ -34,7 +34,11 @@
             }
             return gameOutcome(playerScore,computerScore);
         }
-
+        function abortGame(endGame){
+            if (lowerCaseInput(endGame)==="end" || lowerCaseInput(endGame)==="" ){
+                return "exitGame";
+            }
+        }
         function humanPlay(){
             let playerSelection=lowerCaseInput(prompt("Time to play, please choose between: rock, paper, scissors"));
             if (playerSelection==="rock" || playerSelection==="paper" ||playerSelection==="scissors"){
