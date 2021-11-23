@@ -37,11 +37,13 @@
             return gameOutcome(playerScore,computerScore);
         }
         function abortGame(endGame){
+            //returns exitGame when user enters no value in prompt box to exit game
             if (lowerCaseInput(endGame)===""){
                 return "exitGame";
             }
         }
         function humanPlay(){
+            //Prompts user to enter his move or to abort game
             let playerSelection=lowerCaseInput(prompt("Time to play, please choose between: rock, paper, scissors. To exit please press enter"));
             if (playerSelection==="rock" || playerSelection==="paper" ||playerSelection==="scissors"||playerSelection===""){
                 return playerSelection;
