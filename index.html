@@ -36,12 +36,12 @@
         }
 
         function humanPlay(){
-            let playerSelection=prompt("Time to play, please choose between: rock, paper, scissors");
+            let playerSelection=lowerCaseInput(prompt("Time to play, please choose between: rock, paper, scissors"));
             if (playerSelection==="rock" || playerSelection==="paper" ||playerSelection==="scissors"){
                 return playerSelection;
             }
             else {
-                return prompt("Please enter a valid play or you will loose the round: rock, paper, scissors");
+                return lowerCaseInput(prompt("Please enter a valid play or you will loose the round: rock, paper, scissors"));
             }
         }
 
@@ -60,10 +60,12 @@
             }
         }
 
+        function lowerCaseInput(playerSelection){
+            return playerSelection.toString().toLowerCase();
+        }
         function gameRound(playerSelection,computerSelection){
             //Determines the outcome of a round of rock, paper scissors. 
             //If user wins +1, if user looses -1, if draw 0
-            playerSelection=playerSelection.toString().toLowerCase();
             if (playerSelection===computerSelection){
                 return 0;
             }
