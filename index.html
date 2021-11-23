@@ -17,7 +17,8 @@
             let playerScore =0;
             let computerScore =0;
             for (round=1;round<=numberRounds;round++){
-                let playerSelection=prompt("Time to play, please choose between: rock, paper, scissors");
+                //let playerSelection=prompt("Time to play, please choose between: rock, paper, scissors");
+                let playerSelection=humanPlay();
                 let computerSelection=computerPlay();
                 let roundResult=gameRound(playerSelection,computerSelection)
                 switch(roundResult) {   
@@ -32,6 +33,16 @@
                 console.log(` ****** End of round ${round} out of ${numberRounds} ******`)
             }
             return gameOutcome(playerScore,computerScore);
+        }
+
+        function humanPlay(){
+            let playerSelection=prompt("Time to play, please choose between: rock, paper, scissors");
+            if (playerSelection==="rock" || playerSelection==="paper" ||playerSelection==="scissors"){
+                return playerSelection;
+            }
+            else {
+                return prompt("Please enter a valid play or you will loose the round: rock, paper, scissors");
+            }
         }
 
         function computerPlay(){ 
