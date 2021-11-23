@@ -43,14 +43,12 @@
             }
         }
         function humanPlay(){
-            //Prompts user to enter his move or to abort game
+            //Prompts user to enter his move or to abort game - prompt will stay until accepted value is entered
             let playerSelection=lowerCaseInput(prompt("Time to play, please choose between: rock, paper, scissors. To exit please press enter"));
-            if (playerSelection==="rock" || playerSelection==="paper" ||playerSelection==="scissors"||playerSelection===""){
+            while (playerSelection!=="rock" && playerSelection!=="paper" && playerSelection!=="scissors" && playerSelection!==""){
+                playerSelection=lowerCaseInput(prompt("Incorrect input, please enter a correct value: rock, paper, scissors. To exit please press enter"));
+            }
                 return playerSelection;
-            }
-            else {
-                return lowerCaseInput(prompt("Please enter a valid move or you will loose the round: rock, paper, scissors.To exit please press enter"));
-            }
         }
 
         function computerPlay(){ 
