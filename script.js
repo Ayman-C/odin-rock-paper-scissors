@@ -1,4 +1,18 @@
-function game(numberRounds=5){
+function printData(data,containerName) {
+    const container=document.querySelector(containerName);
+    container.innerText=data
+    }
+
+
+const buttons=document.querySelectorAll("button");
+buttons.forEach((button) => {
+    button.addEventListener("click",game);
+    });
+
+
+
+//function game(numberRounds=5){
+    function game(){
     //Initiates a game of rock paper scissors with by default numbers of round=5
     //starts by zeroing scores and intialising players moves at each new round
     //determines outcome at each round with roundResult
@@ -7,8 +21,10 @@ function game(numberRounds=5){
     //on the last round displays final results using gameOutcome
     let playerScore =0;
     let computerScore =0;
+    let numberRounds=1;
     for (round=1;round<=numberRounds;round++){
-        let playerSelection=humanPlay();
+        //let playerSelection=humanPlay();
+        let playerSelection=this.innerText;
         if (abortGame(playerSelection)==="exitGame"){
             return "Game has been aborted by player, bye bye"
         } 
@@ -20,10 +36,11 @@ function game(numberRounds=5){
             case -1:computerScore+=1
                     break;
         }
-        console.log(`****** Welcome to round ${round} ******`);
-        console.log(roundOutcome(roundResult,playerSelection,computerSelection));
-        console.log(`Current score: Player @ ${playerScore} VS Computer @ ${computerScore}`)
-        console.log(` ****** End of round ${round} out of ${numberRounds} ******`)
+        printData(` ****** End of round ${round} out of ${numberRounds} ******`,".roundEndInfo");
+        printData(`****** Welcome to round ${round} ******`,".roundStartInfo");
+        printData(roundOutcome(roundResult,playerSelection,computerSelection),".outcomeInfo");
+        printData(`Current score: Player @ ${playerScore} VS Computer @ ${computerScore}`,".scoreInfo");
+
     }
     return gameOutcome(playerScore,computerScore);
 }
@@ -66,7 +83,7 @@ function gameRound(playerSelection,computerSelection){
     if (playerSelection===computerSelection){
         return 0;
     }
-    if ((playerSelection==="rock" && computerSelection==="scissors")||(playerSelection==="paper" && computerSelection==="rock")||(playerSelection==="scissors" && computerSelection==="papper")){
+    if ((playerSelection==="rock" && computerSelection==="scissors")||(playerSelection==="paper" && computerSelection==="rock")||(playerSelection==="scissors" && computerSelection==="paper")){
         return 1;
     }
     else {
