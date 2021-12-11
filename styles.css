@@ -1,0 +1,21 @@
+.roundInfo {
+    background-color:pink;
+    color:yellow;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.inputArea{
+    background-color:blueviolet;
+    color:yellow;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    margin-top: 100px;
+    padding: 50px;
+}
+
+body{
+    background-color: salmon;
+}
