@@ -5,33 +5,42 @@ function printData(data,containerName) {
 const buttons=document.querySelectorAll("button");
 buttons.forEach((button) => {
     button.addEventListener("click",game);
+    
+    //button.addEventListener("click", printOutcome(result));
+   // button.addEventListener("click",e => console.log(game(e)));
     });
-    //function game(numberRounds=5){
-    function game(){
+    //function game(numberRounds=3){
+    function game(evt){
     let playerScore =0;
     let computerScore =0;
-    //let numberRounds=5;
    // for (round=1;round<=numberRounds;round++){
-        //let playerSelection=humanPlay();
-        let playerSelection=this.innerText;
-        // if (abortGame(playerSelection)==="exitGame"){
-        //     return "Game has been aborted by player, bye bye"
-        // } 
+
+        let playerSelection=evt.target.textContent;
+        console.log(evt.target.textContent)
         let computerSelection=computerPlay();
         let roundResult=gameRound(playerSelection,computerSelection)
         switch(roundResult) {   
-            case 1: playerScore+=1
+            case 1: playerScore=1
                     break;
-            case -1:computerScore+=1
+            case -1:computerScore=1
                     break;
         }
-        //printData(`****** Welcome to round ${round} ******`,".roundStartInfo");
-        printData(roundOutcome(roundResult,playerSelection,computerSelection),".outcomeInfo");
-        printData(playerScore,"#playerScore"); 
-        printData(computerScore,"#computerScore");
-        //printData(` ****** End of round ${round} out of ${numberRounds} ******`,".roundEndInfo");
-   // }
-    //return gameOutcome(playerScore,computerScore);
+        
+    //}
+    let outcome={"score":[playerScore,computerScore],"playerSelection":playerSelection,"computerSelection":computerSelection};
+    printOutcome(outcome)
+    //return outcome
+}
+
+function printOutcome(game){
+    //printData(`****** Welcome to round ${round} ******`,".roundStartInfo");
+    //printData(roundOutcome(roundResult,playerSelection,computerSelection),".outcomeInfo");
+    
+    printData(`human played ${game.playerSelection} and scored ${game.score[0]}`,"#playerScore"); 
+    printData(`CPU played ${game.computerSelection} and scored ${game.score[1]}`,"#computerScore"); 
+    
+    //printData(` ****** End of round ${round} out of ${numberRounds} ******`,".roundEndInfo");
+
 }
 function computerPlay(){ 
     //Randomized CPU play: If 0 return rock, if 1 return paper else return scissors
@@ -61,17 +70,17 @@ function gameRound(playerSelection,computerSelection){
     } 
 }
 
-function roundOutcome(gameRound,playerSelection,computerSelection){
-    if (gameRound===1){
-        return `You win, ${playerSelection} beat ${computerSelection}`;
-    } 
-    else if (gameRound===-1){
-        return `You loose, ${computerSelection} beat ${playerSelection}`;
-    }
-    else {
-        return `It's a draw, both of you played ${playerSelection}`;
-    }
-}
+// function roundOutcome(gameRound,playerSelection,computerSelection){
+//     if (gameRound===1){
+//         return `You win, ${playerSelection} beat ${computerSelection}`;
+//     } 
+//     else if (gameRound===-1){
+//         return `You loose, ${computerSelection} beat ${playerSelection}`;
+//     }
+//     else {
+//         return `It's a draw, both of you played ${playerSelection}`;
+//     }
+// }
 
 
 
@@ -96,14 +105,14 @@ function lowerCaseInput(playerSelection){
     return playerSelection.toString().toLowerCase();
 }
 
-function gameOutcome(playerScore,computerScore){
-    if (playerScore===computerScore){
-        return `It is a draw: HUM ${playerScore} - CPU ${computerScore}`;
-    }
-    else if (playerScore>computerScore){
-        return `Player wins, the final score is: HUM ${playerScore} - CPU ${computerScore}`;
-    }
-    else {
-        return `Computer wins, the final score is: HUM ${playerScore} - CPU ${computerScore}`;
-    }
-}
+// function gameOutcome(playerScore,computerScore){
+//     if (playerScore===computerScore){
+//         return `It is a draw: HUM ${playerScore} - CPU ${computerScore}`;
+//     }
+//     else if (playerScore>computerScore){
+//         return `Player wins, the final score is: HUM ${playerScore} - CPU ${computerScore}`;
+//     }
+//     else {
+//         return `Computer wins, the final score is: HUM ${playerScore} - CPU ${computerScore}`;
+//     }
+// }
