@@ -6,6 +6,7 @@ const buttons=document.querySelectorAll("button");
 buttons.forEach((button) => {
     button.addEventListener("click",clearPrintOutcome);
     button.addEventListener("click",game);
+    button.addEventListener("click",dataCounter);
     });
 
     function computerSelection(){ 
@@ -22,6 +23,21 @@ buttons.forEach((button) => {
         }
     }
 
+let roundNumber=0;
+let totalScore=[0,0];
+function dataCounter(rounds=5){
+    let roundData=document.querySelector(".roundInfo");
+    if (roundNumber===0){
+        roundData.innerText=`Round number: 1`
+        roundNumber=1;
+    }    
+    else{
+        roundData.innerText=`Round number: ${roundNumber+1}`
+        roundNumber=roundNumber+1
+    }
+}
+
+
 function game(evt){
     let playerSelection=evt.target.textContent;
     let computerPlay=computerSelection();
@@ -32,24 +48,22 @@ function game(evt){
 function printOutcome(roundOutcome){
     if(roundOutcome.score[0]===1) {
         printData("Congratulations, you won!!",".outcomeInfo"); 
+        totalScore[0]+=1
         }
     else if (roundOutcome.score[1]===1) {
-        printData("Uh oh, CPU won...",".outcomeInfo");   
+        printData("Uh oh, CPU won...",".outcomeInfo");  
+        totalScore[1]+=1 
         }
     else{
         printData("It's a draw!!!",".outcomeInfo"); 
-        return
     }
-    printData(`****** Welcome to round 1 ******`,".roundNumber");
-    printData(`human played ${roundOutcome.playerSelection} and scored ${roundOutcome.score[0]}`,"#playerScore"); 
-    printData(`CPU played ${roundOutcome.computerSelection} and scored ${roundOutcome.score[1]}`,"#computerScore"); 
-    //printData(` ****** End of round ${round} out of ${numberRounds} ******`,".roundEndInfo");
+    printData(`Total score: HUM ${totalScore[0]} VS CPU ${totalScore[1]} `,".scoreInfo"); 
+    //printData(`CPU played ${roundOutcome.computerSelection} and scored ${roundOutcome.score[1]}`,".computscoreInfoerScore"); 
 }
 
 function clearPrintOutcome(){
     printData('',".outcomeInfo");
-    printData('',"#playerScore");
-    printData('',"#computerScore");
+    printData('',".scoreInfo");
 }
 
 function roundResult(playerSelection,computerSelection){
@@ -66,6 +80,16 @@ function roundResult(playerSelection,computerSelection){
         return [0,1];
     } 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
