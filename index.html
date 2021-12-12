@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>"My Rock Paper Scissors game</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -13,13 +14,13 @@
         <button class="buttons" id="button3">scissors</button>
     </div>
 
-    <ul style="list-style-type: none;" class="roundInfo">
-        <li class="roundStartInfo"></li>
+    <ul style="list-style-type: none;" class="roundDisplay">
+        <li class="roundInfo"></li>
         <li class="outcomeInfo"></li>
         <li class="scoreInfo">
-            <span> Score: <span id="playerScore"></span> vs <span id="computerScore"></span> </span>
+            <div class="playerScore"></div>  <div class="computerScore"></div>
         </li>
         <li class="roundEndInfo"></li>
     </ul>
-    <script src="script.js"></script>
+    
 </body>
