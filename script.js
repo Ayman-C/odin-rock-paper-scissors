@@ -1,31 +1,69 @@
+let roundNumber=0;
+let totalScore=[0,0];
+let gameOver=false;
+gameStart()
+
+
 function printData(data,containerName) {
     const container=document.querySelector(containerName);
     container.innerText=data
     }
-const buttons=document.querySelectorAll("button");
-buttons.forEach((button) => {
-    button.addEventListener("click",clearPrintOutcome);
-    button.addEventListener("click",game);
-    button.addEventListener("click",dataCounter);
+
+
+function gameStart() {
+    const buttons=document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.addEventListener("click",clearPrintOutcome);
+        button.addEventListener("click",game);
+        button.addEventListener("click",dataCounter);
+        
     });
+}
 
-    function computerSelection(){ 
-        //Randomized CPU play: If 0 return rock, if 1 return paper else return scissors
-        let randomOutcome=Math.floor(Math.random()*3)            
-        if (randomOutcome===0) {
-            return "rock";
-        }
-        else if (randomOutcome===1) {
-            return "paper";
-        }
-        else {
-            return "scissors";
-        }
+function computerSelection(){ 
+    //Randomized CPU play: If 0 return rock, if 1 return paper else return scissors
+    let randomOutcome=Math.floor(Math.random()*3)            
+    if (randomOutcome===0) {
+        return "rock";
     }
+    else if (randomOutcome===1) {
+        return "paper";
+    }
+    else {
+        return "scissors";
+    }
+}
 
-let roundNumber=0;
-let totalScore=[0,0];
-function dataCounter(rounds=5){
+function gameEnd(){
+    if (gameOver===true) {
+        const buttons=document.querySelectorAll("button");
+        buttons.forEach((button) => {
+            button.removeEventListener("click",clearPrintOutcome);
+            button.removeEventListener("click",game);
+            button.removeEventListener("click",dataCounter);
+            })
+            if (document.getElementById("button4")===null) {
+                buttonRestart=document.createElement("button");
+                document.getElementById("buttonArea").appendChild(buttonRestart);
+                buttonRestart.id="button4"
+                buttonRestart.innerText="Restart?"
+                document.getElementById("button4").setAttribute("class","buttons")
+            }
+
+            document.getElementById("button4").addEventListener("click",function(){gameOver=false});
+            document.getElementById("button4").addEventListener("click",clearPrintOutcome);
+            document.getElementById("button4").addEventListener("click",gameStart);
+            document.getElementById("button4").addEventListener("click",function(){this.remove()});
+            totalScore=[0,0];
+            roundNumber=0;
+        }
+
+      
+
+    
+}
+
+function dataCounter(){
     let roundData=document.querySelector(".roundInfo");
     if (roundNumber===0){
         roundData.innerText=`Round number: 1`
@@ -37,33 +75,45 @@ function dataCounter(rounds=5){
     }
 }
 
-
 function game(evt){
     let playerSelection=evt.target.textContent;
     let computerPlay=computerSelection();
     let roundOutcome={"score":roundResult(playerSelection,computerPlay),"playerSelection":playerSelection,"computerSelection":computerPlay};
     printOutcome(roundOutcome)
+    gameEnd()
 }
 
 function printOutcome(roundOutcome){
     if(roundOutcome.score[0]===1) {
-        printData("Congratulations, you won!!",".outcomeInfo"); 
         totalScore[0]+=1
+        if (totalScore[0]===5) {
+            printData("You won the game",".outcomeInfo");
+            gameOver=true;
         }
+        else {
+            printData("Congratulations, you won!!",".outcomeInfo"); 
+        }
+    }
     else if (roundOutcome.score[1]===1) {
-        printData("Uh oh, CPU won...",".outcomeInfo");  
         totalScore[1]+=1 
+        if (totalScore[1]===5) {
+            printData("Game Over!",".outcomeInfo");    
+            gameOver=true; 
         }
+        else {
+            printData("Uh oh, CPU won...",".outcomeInfo");  
+        }
+    }
     else{
         printData("It's a draw!!!",".outcomeInfo"); 
     }
     printData(`Total score: HUM ${totalScore[0]} VS CPU ${totalScore[1]} `,".scoreInfo"); 
-    //printData(`CPU played ${roundOutcome.computerSelection} and scored ${roundOutcome.score[1]}`,".computscoreInfoerScore"); 
 }
 
 function clearPrintOutcome(){
     printData('',".outcomeInfo");
     printData('',".scoreInfo");
+    printData('',".roundInfo");
 }
 
 function roundResult(playerSelection,computerSelection){
