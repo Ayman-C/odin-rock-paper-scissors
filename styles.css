@@ -1,21 +1,28 @@
 .roundDisplay {
-    background-color:pink;
-    color:yellow;
+    color:white;
     flex-direction: column;
     text-align: center;
     justify-content: center;
+    padding: 50px;
 }
 
-.inputArea{
-    background-color:blueviolet;
-    color:yellow;
+.buttons {
+    background-color: black;
+    border:0.1em solid #FFFFFF;
+    color:white;
+    border-radius:5px;
+    padding:5px
+       
+}
+
+.inputArea {
     flex-direction: row;
     text-align: center;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 76px;
     padding: 50px;
 }
 
 body{
-    background-color: salmon;
+    background-color: black;
 }
