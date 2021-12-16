@@ -3,10 +3,8 @@ let totalScore=[0,0];
 let gameOver=false;
 gameStart()
 
-function printData(data,containerName) {
-    const container=document.querySelector(containerName);
-    container.innerText=data
-    }
+
+
 function gameStart() {
     const buttons=document.querySelectorAll("button");
     buttons.forEach((button) => {
@@ -16,19 +14,16 @@ function gameStart() {
         button.addEventListener("click",function(){toggleclass(true,"toggleDisplay")})   
     });
 }
+
 function computerSelection(){ 
     //Randomized CPU play: If 0 return rock, if 1 return paper else return scissors
-    let randomOutcome=Math.floor(Math.random()*3)            
-    if (randomOutcome===0) {
-        return "rock";
-    }
-    else if (randomOutcome===1) {
-        return "paper";
-    }
-    else {
-        return "scissors";
-    }
+    let randomOutcome=Math.floor(Math.random()*3);  
+    computerPlay={0:"rock",1:"paper",2:"scissors"};        
+    return computerPlay[randomOutcome];
 }
+
+
+
 function gameEnd(){
     if (gameOver===true) {
         const buttons=document.querySelectorAll("button");
@@ -55,6 +50,7 @@ function gameEnd(){
             roundNumber=0;
         }    
 }
+
 function dataCounter(){
     let roundData=document.querySelector(".roundInfo");
     if (roundNumber===0){
@@ -66,6 +62,7 @@ function dataCounter(){
         roundNumber=roundNumber+1
     }
 }
+
 function game(evt){
     let playerSelection=evt.target.textContent;
     let computerPlay=computerSelection();
@@ -73,18 +70,9 @@ function game(evt){
     printOutcome(roundOutcome)
     gameEnd()
 }
-function toggleclass(onOff,className){
-    const listItems=document.querySelectorAll("li");
-    listItems.forEach((item)=>{
-            if(item.innerText==="") {
-                //( onOff ? item.classList.add(className) : item.classList.remove(className)) 
-            item.classList.remove(className)
-            }
-            else{
-                item.classList.add(className) 
-            }
-        })    
-}
+
+
+
 function printOutcome(roundOutcome){
     if(roundOutcome.score[0]===1) {
         totalScore[0]+=1
@@ -134,60 +122,29 @@ function roundResult(playerSelection,computerSelection){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////////////Not in use////////////
-function abortGame(endGame){
-    //returns exitGame when user enters no value in prompt box to exit game
-    if (lowerCaseInput(endGame)===""){
-        return "exitGame";
+function printData(data,containerName) {
+    const container=document.querySelector(containerName);
+    container.innerText=data
     }
-}
-function humanPlay(){
-    //Prompts user to enter his move or to abort game - prompt will stay until accepted value is entered
-    let playerSelection=lowerCaseInput(prompt("Time to play, please choose between: rock, paper, scissors. To exit please press enter"));
-    while (playerSelection!=="rock" && playerSelection!=="paper" && playerSelection!=="scissors" && playerSelection!==""){
-        playerSelection=lowerCaseInput(prompt("Incorrect input, please enter a correct value: rock, paper, scissors. To exit please press enter"));
-    }
-        return playerSelection;
+
+
+function toggleclass(onOff,className){
+    const listItems=document.querySelectorAll("li");
+    listItems.forEach((item)=>{
+        if(item.innerText==="") {
+            item.classList.remove(className)
+        }
+        else{
+            item.classList.add(className) 
+        }
+    })    
 }
 
-function lowerCaseInput(playerSelection){
-    return playerSelection.toString().toLowerCase();
-}
 
-// function gameOutcome(playerScore,computerScore){
-//     if (playerScore===computerScore){
-//         return `It is a draw: HUM ${playerScore} - CPU ${computerScore}`;
-//     }
-//     else if (playerScore>computerScore){
-//         return `Player wins, the final score is: HUM ${playerScore} - CPU ${computerScore}`;
-//     }
-//     else {
-//         return `Computer wins, the final score is: HUM ${playerScore} - CPU ${computerScore}`;
-//     }
-// }
 
-// function roundOutcome(gameRound,playerSelection,computerSelection){
-//     if (gameRound===1){
-//         return `You win, ${playerSelection} beat ${computerSelection}`;
-//     } 
-//     else if (gameRound===-1){
-//         return `You loose, ${computerSelection} beat ${playerSelection}`;
-//     }
-//     else {
-//         return `It's a draw, both of you played ${playerSelection}`;
-//     }
-// }
+
+
+
+
+
+
