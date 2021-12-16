@@ -76,7 +76,13 @@ function game(evt){
 function toggleclass(onOff,className){
     const listItems=document.querySelectorAll("li");
     listItems.forEach((item)=>{
-            ( onOff ? item.classList.add(className) : item.classList.remove(className)) 
+            if(item.innerText==="") {
+                //( onOff ? item.classList.add(className) : item.classList.remove(className)) 
+            item.classList.remove(className)
+            }
+            else{
+                item.classList.add(className) 
+            }
         })    
 }
 function printOutcome(roundOutcome){
