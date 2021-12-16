@@ -3,23 +3,19 @@ let totalScore=[0,0];
 let gameOver=false;
 gameStart()
 
-
 function printData(data,containerName) {
     const container=document.querySelector(containerName);
     container.innerText=data
     }
-
-
 function gameStart() {
     const buttons=document.querySelectorAll("button");
     buttons.forEach((button) => {
         button.addEventListener("click",clearPrintOutcome);
         button.addEventListener("click",game);
-        button.addEventListener("click",dataCounter);
-        
+        button.addEventListener("click",dataCounter); 
+        button.addEventListener("click",function(){toggleclass(true,"toggleDisplay")})   
     });
 }
-
 function computerSelection(){ 
     //Randomized CPU play: If 0 return rock, if 1 return paper else return scissors
     let randomOutcome=Math.floor(Math.random()*3)            
@@ -33,7 +29,6 @@ function computerSelection(){
         return "scissors";
     }
 }
-
 function gameEnd(){
     if (gameOver===true) {
         const buttons=document.querySelectorAll("button");
@@ -54,15 +49,12 @@ function gameEnd(){
             document.getElementById("button4").addEventListener("click",clearPrintOutcome);
             document.getElementById("button4").addEventListener("click",gameStart);
             document.getElementById("button4").addEventListener("click",function(){this.remove()});
+            document.getElementById("button4").addEventListener("click",function(){toggleclass(false,"toggleDisplay")});
+            
             totalScore=[0,0];
             roundNumber=0;
-        }
-
-      
-
-    
+        }    
 }
-
 function dataCounter(){
     let roundData=document.querySelector(".roundInfo");
     if (roundNumber===0){
@@ -74,7 +66,6 @@ function dataCounter(){
         roundNumber=roundNumber+1
     }
 }
-
 function game(evt){
     let playerSelection=evt.target.textContent;
     let computerPlay=computerSelection();
@@ -82,7 +73,12 @@ function game(evt){
     printOutcome(roundOutcome)
     gameEnd()
 }
-
+function toggleclass(onOff,className){
+    const listItems=document.querySelectorAll("li");
+    listItems.forEach((item)=>{
+            ( onOff ? item.classList.add(className) : item.classList.remove(className)) 
+        })    
+}
 function printOutcome(roundOutcome){
     if(roundOutcome.score[0]===1) {
         totalScore[0]+=1
